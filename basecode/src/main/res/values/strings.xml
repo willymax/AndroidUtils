@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">basecode</string>
+    <string name="lorem_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Etiam non enim magna. Morbi dictum, velit
+        vel semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis.
+        Pellentesque vitae metus elit, nec tincidunt tellus.
+    </string>
+    <string name="message_waiting">Please wait…</string>
+    <string name="connection_timed_out">Connection timed out</string>
+    <string name="error_connection">Seems like your connection to the server is taking too long. Please check your network status</string>
+    <string name="server_error">Server error</string>
+    <string name="error_application">An application error occurred</string>
+    <string name="report">Report</string>
+    <string name="retry">Retry</string>
+    <string name="not_found">The requested resource can not be found</string>
+
+    <string name="message_no_more_data">Nothing more :( Tap to retry or pull down to refresh.</string>
+    <string name="message_empty_data">Oops! Nothing here yet :( Tap to refresh</string>
+    <string name="message_loading">Loading…</string>
+    <string name="message_connection_error">Seems like your connection to the server is taking too long :( Tap to retry or check your network status</string>
+    <string name="message_refreshing">Refreshing…</string>
+    <string name="unable_to_refresh">Unable to refresh</string>
+    <string name="error_network_not_available">No internet connection</string>
+    <string name="message_no_internet_connetion">Unable to establish an internet connection. Please ensure your internet connection is working properly!</string>
+    <string name="message_server_error">An error occurred from the server! Please report this error.</string>
+    <string name="one_tab">\u0009</string>
+    <string name="two_tab">\u0009\u0009</string>
+    <string name="three_tab">\u0009\u0009\u0009</string>
+    <string name="four_tab">\u0009\u0009\u0009\u0009</string>
+    <string name="pref_user" />
+    <string name="cache_sign_in_id" />
+    <string name="cache_password" />
+    <string name="currency_code">KES</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_password_match">Password does not match</string>
+    <string name="hint_phone_or_email">Phone or Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="pref_phone" />
+    <string name="pref_sign_in_id" />
+    <string name="sign_in">Sign In</string>
+    <string name="string_number">%1$s %2$d</string>
+    <string name="user_name">%1$s %2$s</string>
+    <string name="number_string">%1$d %2$s</string>
+    <string name="string_string">%1$s %2$s</string>
+    <string name="string_string_string">%1$s %2$s %3$s</string>
+    <string name="string_holder">%1$s</string>
+    <string name="number_holder">%1$d</string>
+    <string name="error_invalid_phone">Enter a valid phone number</string>
+    <string name="number">1</string>
+    <string name="todo">TODO</string>
+</resources>

@@ -1,0 +1,82 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.3.50'
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+ext {
+    versionCode = 1
+    versionName = "1.0"
+    // Sdk and tools
+    compileSdkVersion = 28
+    minSdkVersion = 16
+    targetSdkVersion = 28
+
+    // App dependencies
+    supportLibVersion = '1.0.2'
+    constraintLayoutVersion = '1.1.3'
+    archComponentsVersion = '2.0.0'
+    roomVersion = '2.1.0-alpha01'
+    pagingVersion = '2.1.0-alpha01'
+    retrofitVersion = '2.6.0'
+    okhttpLoggingInterceptorVersion = '3.11.0'
+    version_moshi = '1.8.0'
+    version_retrofit_coroutines_adapter = '0.9.2'
+    appCompatVersion = '1.1.0-beta01'
+    constraintLayoutVersion = '2.0.0-beta1'
+    coreTestingVersion = '2.0.0'
+    coroutinesVersion = "1.3.0-M2"
+    espressoVersion = '3.1.1'
+    fragmentVersion = '1.1.0-alpha09'
+    glideVersion = '4.9.0'
+    gradleVersion = '3.5.0-beta05'
+    gsonVersion = '2.8.2'
+    junitVersion = '4.12'
+    kotlinVersion = '1.3.41'
+    ktlintVersion = '0.30.0'
+    ktxVersion = '1.0.2'
+    annotationVersion = '1.1.0'
+    legacysupportVersion = '1.0.0'
+    playServicesAuthVersion = '17.0.0'
+    lifecycleVersion = '2.2.0-alpha01'
+    materialVersion = '1.1.0-alpha09'
+    navigationVersion = '2.0.0'
+    recyclerViewVersion = '1.1.0-beta01'
+    roomVersion = '2.1.0'
+    runnerVersion = '1.0.1'
+    truthVersion = '0.42'
+    testExtJunit = '1.1.0'
+    uiAutomatorVersion = '2.2.0'
+    workVersion = '2.1.0'
+    multidexVersion = '1.0.3'
+    facebookLoginVersion = '5.1.1'
+    circularImageviewVersion = '3.2.0'
+    okhttpVersion = '4.0.0'
+    loggingInterceptor = '4.0.0'
+    placesVersion = '2.0.0'
+    materialRippleVersion = '1.0.2'
+    cameraxVersion = "1.0.0-alpha01"
+    preferenceVersion = "1.1.0-rc01"
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

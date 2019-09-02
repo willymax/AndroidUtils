@@ -162,6 +162,28 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    open fun onAuthSuccessful(user: User?) {
+        PrefUtils.instance?.saveUser(user)
+        startMainActivity()
+        // toast(meta!!.message)
+        this.finish()
+    }
+
+    open fun startMainActivity() {
+//        try {
+//            val ai = packageManager
+//                .getApplicationInfo(packageName, PackageManager.GET_META_DATA)
+//            val bundle = ai.metaData
+//            val mainActivityCategory = bundle.getString(Utils.META_NAME_MAIN_ACTIVITY_CATEGORY)
+//            startNewTaskActivity(Intent(Utils.ACTION_MAIN_ACTIVITY).addCategory(mainActivityCategory))
+//        } catch (e: PackageManager.NameNotFoundException) {
+//            throw IllegalArgumentException("Failed to load meta-data " + Utils.META_NAME_MAIN_ACTIVITY_CATEGORY)
+//        } catch (e: NullPointerException) {
+//            throw IllegalArgumentException("Failed to load meta-data " + Utils.META_NAME_MAIN_ACTIVITY_CATEGORY)
+//        }
+    }
+
+
     fun updateProgressDialogMessage(newMessage: String) {
         if (mProgressDialog != null && mProgressDialog?.isShowing == true) {
             mProgressDialog?.setMessage(newMessage)
@@ -215,36 +237,7 @@ open class BaseActivity : AppCompatActivity() {
     protected val user: User?
         get() = PrefUtils.instance?.getUser()
 
-    fun onAuthSuccessful(user: User?) {
-        PrefUtils.instance?.saveUser(user)
-        startMainActivity()
-        // toast(meta!!.message)
-        this.finish()
-    }
-
     open fun signOut() {
-        SignOutTask(object : SignOutTask.TaskListener {
-            override val activity: Activity
-                get() = this@BaseActivity
-            override fun onComplete() {
-                startNewTaskActivity(Intent(this@BaseActivity, BaseSignInActivity::class.java))
-                this@BaseActivity.finish()
-            }
-        }).execute()
-    }
-
-    fun startMainActivity() {
-        try {
-            val ai = packageManager
-                .getApplicationInfo(packageName, PackageManager.GET_META_DATA)
-            val bundle = ai.metaData
-            val mainActivityCategory = bundle.getString(Utils.META_NAME_MAIN_ACTIVITY_CATEGORY)
-            startNewTaskActivity(Intent(Utils.ACTION_MAIN_ACTIVITY).addCategory(mainActivityCategory))
-        } catch (e: PackageManager.NameNotFoundException) {
-            throw IllegalArgumentException("Failed to load meta-data " + Utils.META_NAME_MAIN_ACTIVITY_CATEGORY)
-        } catch (e: NullPointerException) {
-            throw IllegalArgumentException("Failed to load meta-data " + Utils.META_NAME_MAIN_ACTIVITY_CATEGORY)
-        }
 
     }
 

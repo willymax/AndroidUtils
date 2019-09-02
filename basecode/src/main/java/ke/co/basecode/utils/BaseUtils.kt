@@ -27,7 +27,6 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
-import com.rengwuxian.materialedittext.validation.METValidator
 import ke.co.basecode.R
 import ke.co.basecode.logging.BeeLog
 
@@ -209,38 +208,6 @@ class BaseUtils {
 
         fun dpToPx(dp: Int): Int {
             return (dp * Resources.getSystem().displayMetrics.density).toInt()
-        }
-
-        fun createEmailValidator(errorMsg: String): METValidator {
-            return object : METValidator(errorMsg) {
-                override fun isValid(text: CharSequence, isEmpty: Boolean): Boolean {
-                    return !isEmpty && Patterns.EMAIL_ADDRESS.matcher(text).matches()
-                }
-            }
-        }
-
-        fun createPhoneValidator(errorMsg: String): METValidator {
-            return object : METValidator(errorMsg) {
-                override fun isValid(text: CharSequence, isEmpty: Boolean): Boolean {
-                    return !isEmpty && Patterns.PHONE.matcher(text).matches()
-                }
-            }
-        }
-
-        fun createRequiredValidator(errorMsg: String): METValidator {
-            return object : METValidator(errorMsg) {
-                override fun isValid(text: CharSequence, isEmpty: Boolean): Boolean {
-                    return !isEmpty
-                }
-            }
-        }
-
-        fun createLengthValidator(length: Int): METValidator {
-            return object : METValidator("You must input $length characters") {
-                override fun isValid(text: CharSequence, isEmpty: Boolean): Boolean {
-                    return !isEmpty && text.length == length
-                }
-            }
         }
 
         /**

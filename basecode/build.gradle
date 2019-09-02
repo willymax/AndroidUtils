@@ -52,11 +52,6 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.google.android.libraries.places:places:$placesVersion"
 
-    implementation('com.rengwuxian.materialedittext:library:2.1.4') {
-        transitive = true
-        exclude group: 'com.android.support'
-    }
-
     //https://github.com/square/moshi
     implementation "com.squareup.moshi:moshi:$version_moshi"
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
@@ -68,10 +63,7 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
 
     //https://github.com/square/retrofit
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion") {
-        transitive = true
-        exclude group: 'com.android.support'
-    }
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
 
 //    implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion") {
 //        transitive = true
@@ -81,23 +73,12 @@ dependencies {
 
     //okhttp3
 
-    implementation("com.squareup.okhttp3:logging-interceptor:$loggingInterceptor") {
-        transitive = true
-        exclude group: 'com.android.support'
-    }
+    implementation "com.squareup.okhttp3:logging-interceptor:$loggingInterceptor"
 
-    implementation("com.squareup.okhttp3:okhttp:$okhttpVersion") {
-        transitive = true
-        exclude group: 'com.android.support'
-    }
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
 
     implementation "com.android.support:multidex:$multidexVersion"
-
-    //https://github.com/bumptech/glide
-    implementation("com.github.bumptech.glide:glide:$glideVersion") {
-        transitive = true
-        exclude group: 'com.android.support'
-    }
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
 
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 

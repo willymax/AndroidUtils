@@ -46,7 +46,7 @@ class Client private constructor(val config: Config) {
 
     abstract class Config {
 
-        protected abstract val context: Application
+        abstract val context: Application
 
         abstract val baseUrl: String
 

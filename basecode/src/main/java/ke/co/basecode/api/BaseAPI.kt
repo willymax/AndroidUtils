@@ -2,8 +2,6 @@ package ke.co.basecode.api
 
 import ke.co.basecode.model.BaseResponseModel
 import ke.co.basecode.model.User
-import ke.co.basecode.network.BackEnd
-import kotlinx.coroutines.Deferred
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Multipart
@@ -21,8 +19,8 @@ import retrofit2.http.Part
 interface BaseAPI {
 
     @Multipart
-    @POST(BackEnd.EndPoints.SIGN_IN)
-    fun signIn(@Part(BackEnd.Params.SIGN_IN_ID) id: RequestBody, @Part(BackEnd.Params.PASSWORD) password: RequestBody): Call<BaseResponseModel<User>>
+    @POST("")
+    fun signIn(@Part("") id: RequestBody, @Part("") password: RequestBody): Call<BaseResponseModel<User>>
 
     /*@GET("varieties")
     Call<List<Variety>> getVarieties();

@@ -5,6 +5,7 @@ import android.util.Log
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import ke.co.basecode.rest.Client
 import ke.co.basecode.utils.PrefUtils
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -55,7 +56,7 @@ object ServiceGenerator {
             }
         }
         return Retrofit.Builder()
-            .baseUrl(BackEnd.BASE_URL)
+            .baseUrl(Client.instance.config.baseUrl)
             .client(client.build())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())

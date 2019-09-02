@@ -3,10 +3,10 @@ package ke.co.basecode.utils
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import ke.co.basecode.App
 import ke.co.basecode.model.User
 import com.squareup.moshi.Moshi
 import ke.co.basecode.R
+import ke.co.basecode.rest.Client
 
 
 /**
@@ -29,15 +29,7 @@ class PrefUtils private constructor() : PrefUtilsImpl() {
         }
 
     protected override val context: Context
-        get() = App.instance!!
-
-    val isPurchasingHead: Boolean
-        get() = getUser()?.role?.name == "PURCHASING_HEAD"
-
-    val isDepartmentHead: Boolean
-        get() = getUser()?.role?.name == "DEPARTMENT_HEAD"
-    val isDepartmentUser: Boolean
-        get() = getUser()?.role?.name == "DEPARTMENT_USER"
+        get() = Client.instance.config.context
 
 
     fun signOut() {

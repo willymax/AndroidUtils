@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import ke.co.basecode.App
 import ke.co.basecode.R
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
@@ -29,38 +28,20 @@ import java.util.*
  * Purpose:
  */
 object Utils {
-    private val TAG = "Utils"
-    const val ACTION_MAIN_ACTIVITY = "com.citylyf.action.MAIN_ACTIVITY"
-    const val META_NAME_MAIN_ACTIVITY_CATEGORY = "com.citylyf.meta.MAIN_ACTIVITY_CATEGORY"
-    const val CATEGORY_RIDER = "com.cube_messenger.category.WALLET"
-    const val ACCOUNT_ACTIVITY = "com.cube_messenger.staff.activity.AccountActivity"
     const val PRICE_FORMAT = "%,.2f"
-    const val SHOPPING_ACTIVITY = "com.cube_messenger.staff.activity.ShoppingActivity"
-    const val SHOPPING_CATEGORY_LIST = "com.cube_messenger.staff.activity.ShoppingCategoryListActivity"
-    const val ADD_TO_CART_FRAGMENT_TAG = "Add_To_Card"
-    const val SUBSCRIPTIONS_ACTIVITY = "com.cube_messenger.staff.activity.SubscriptionsActivity"
-    const val ORDERS_ACTIVITY = "com.cube_messenger.staff.activity.OrdersActivity"
-    const val ORDERED_ITEMS_ACTIVITY = "com.cube_messenger.staff.activity.RawItemsActivity"
-    const val COURIER_ACTIVITY = "com.cube_messenger.staff.activity.CourierActivity"
-    const val APPOINTMENT_ACTIVITY = "com.cube_messenger.staff.activity.AppointmentsActivity"
-    const val PROFILE_ACTIVITY = "com.cube_messenger.staff.activity.ProfileActivity"
-    const val ORDER_DETAILS_FRAGMENT_TAG = "Order_Details_Fragment"
-    const val SHOPPING_ACTIVITY_REQUEST_CODE = 20
-    const val TARGET_FRAGMENT_ID = "TARGET_FRAGMENT_ID"
-    const val AT_DEPARTMENT_HEAD = "AT_DEPARTMENT_HEAD"
-    const val AT_PURCHASING_HEAD = "AT_PURCHASING_HEAD"
     private val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
+
 
     fun formatPrice(price: Double): String {
         return String.format(Locale.ENGLISH, PRICE_FORMAT, price)
     }
 
 
-    fun formatCurrency(bigDecimal: BigDecimal): String {
-
-        return (App.instance?.getString(R.string.currency_code) + " "
-                + bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString())
-    }
+//    fun formatCurrency(bigDecimal: BigDecimal): String {
+//
+//        return (App.instance?.getString(R.string.currency_code) + " "
+//                + bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString())
+//    }
 
 
     fun startNewActivity(context: Context, activityName: String) {

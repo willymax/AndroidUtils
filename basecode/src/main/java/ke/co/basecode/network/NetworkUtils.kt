@@ -1,4 +1,4 @@
-package ke.co.basecode.utils
+package ke.co.basecode.network
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -18,13 +18,15 @@ class NetworkUtils private constructor() {
         private var mClientInstance: OkHttpClient? = null
 
         fun init(callback: Callback) {
-            mInstance = NetworkUtils()
+            mInstance =
+                NetworkUtils()
             mCallback = callback
         }
 
         fun getClientInstance(): OkHttpClient {
             return mClientInstance ?: synchronized(this) {
-                mClientInstance ?: buildClient().also { mClientInstance = it }
+                mClientInstance
+                    ?: buildClient().also { mClientInstance = it }
             }
         }
 

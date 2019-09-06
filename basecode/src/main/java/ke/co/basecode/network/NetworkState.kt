@@ -9,7 +9,6 @@ package ke.co.basecode.network
  * Purpose:
  */
 class NetworkState(val status: Status, val msg: String) {
-
     enum class Status {
         RUNNING,
         SUCCESS,

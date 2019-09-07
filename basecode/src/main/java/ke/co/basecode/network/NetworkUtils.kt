@@ -18,8 +18,7 @@ class NetworkUtils private constructor() {
         private var mClientInstance: OkHttpClient? = null
 
         fun init(callback: Callback) {
-            mInstance =
-                NetworkUtils()
+            mInstance = NetworkUtils()
             mCallback = callback
         }
 
@@ -81,7 +80,7 @@ class NetworkUtils private constructor() {
                 response
             }
 
-            builder.addInterceptor(ChuckInterceptor(mCallback.getContext()))
+            //builder.addInterceptor(ChuckInterceptor(mCallback.getContext()))
 
             if (BuildConfig.DEBUG == true) {
                 val logger = HttpLoggingInterceptor()

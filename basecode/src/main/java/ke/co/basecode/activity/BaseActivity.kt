@@ -24,7 +24,6 @@ import ke.co.basecode.tasks.SignOutTask
 import ke.co.basecode.utils.BaseProgressDialog
 import ke.co.basecode.utils.BaseUtils
 import ke.co.basecode.utils.PrefUtils
-import ke.co.basecode.utils.Utils
 
 open class BaseActivity : AppCompatActivity() {
     private val TAG = "BaseActivity"

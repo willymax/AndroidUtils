@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import com.readystatesoftware.chuck.BuildConfig
 import com.readystatesoftware.chuck.ChuckInterceptor
+import ke.co.basecode.logging.BeeLog
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -82,11 +83,12 @@ class NetworkUtils private constructor() {
 
             //builder.addInterceptor(ChuckInterceptor(mCallback.getContext()))
 
-            if (BuildConfig.DEBUG == true) {
+            if (BeeLog.DEBUG) {
                 val logger = HttpLoggingInterceptor()
                 logger.level = HttpLoggingInterceptor.Level.BODY
                 builder.addInterceptor(logger)
             }
+
             return builder.build()
         }
 

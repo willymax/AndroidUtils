@@ -72,6 +72,12 @@ dependencies {
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
     releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
 
+    //swiperefreshlayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
+    // https://github.com/ParkSangGwon/TedPermission
+    implementation 'gun0912.ted:tedpermission:2.2.2'
+
     //coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
@@ -88,9 +94,8 @@ dependencies {
     implementation"com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     //okhttp3
-
     implementation "com.squareup.okhttp3:logging-interceptor:$loggingInterceptor"
-//
+    //
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
 
 

@@ -1,6 +1,7 @@
-package ke.co.basecode.activity
+@file:Suppress("UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused")
 
-import android.app.Activity
+package ke.co.basecode.app
+
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -20,7 +21,6 @@ import androidx.fragment.app.Fragment
 import ke.co.basecode.R
 import ke.co.basecode.logging.BeeLog
 import ke.co.basecode.model.User
-import ke.co.basecode.tasks.SignOutTask
 import ke.co.basecode.utils.BaseProgressDialog
 import ke.co.basecode.utils.BaseUtils
 import ke.co.basecode.utils.PrefUtils
@@ -169,17 +169,6 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     open fun startMainActivity() {
-//        try {
-//            val ai = packageManager
-//                .getApplicationInfo(packageName, PackageManager.GET_META_DATA)
-//            val bundle = ai.metaData
-//            val mainActivityCategory = bundle.getString(Utils.META_NAME_MAIN_ACTIVITY_CATEGORY)
-//            startNewTaskActivity(Intent(Utils.ACTION_MAIN_ACTIVITY).addCategory(mainActivityCategory))
-//        } catch (e: PackageManager.NameNotFoundException) {
-//            throw IllegalArgumentException("Failed to load meta-data " + Utils.META_NAME_MAIN_ACTIVITY_CATEGORY)
-//        } catch (e: NullPointerException) {
-//            throw IllegalArgumentException("Failed to load meta-data " + Utils.META_NAME_MAIN_ACTIVITY_CATEGORY)
-//        }
     }
 
 

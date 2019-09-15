@@ -23,7 +23,6 @@ import ke.co.basecode.logging.BeeLog
 import ke.co.basecode.model.User
 import ke.co.basecode.utils.BaseProgressDialog
 import ke.co.basecode.utils.BaseUtils
-import ke.co.basecode.utils.PrefUtils
 
 open class BaseActivity : AppCompatActivity() {
     private val TAG = "BaseActivity"
@@ -161,14 +160,8 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    open fun onAuthSuccessful(user: User?) {
-        PrefUtils.instance?.saveUser(user)
-        startMainActivity()
-        // toast(meta!!.message)
-        this.finish()
-    }
-
     open fun startMainActivity() {
+
     }
 
 
@@ -219,11 +212,6 @@ open class BaseActivity : AppCompatActivity() {
     protected fun getLeaveExitAnim(): Int {
         return R.anim.slide_right_out
     }
-    val isLoggedIn: Boolean
-        get() = user != null
-
-    protected val user: User?
-        get() = PrefUtils.instance?.getUser()
 
     open fun signOut() {
 

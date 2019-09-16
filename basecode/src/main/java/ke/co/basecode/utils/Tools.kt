@@ -9,8 +9,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
@@ -29,6 +31,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.gms.maps.GoogleMap
 
 import java.net.URI
@@ -160,9 +166,33 @@ object Tools {
     //        }
     //    }
 
-    fun displayImageOriginal(ctx: Context, img: ImageView, url: String) {
+    fun displayImageOriginal(ctx: Context, img: ImageView, url: String, onError: (Exception?) -> Unit?, onSuccess: (Drawable?) -> Unit?) {
         try {
-            Glide.with(ctx).load(url)
+            Glide.with(ctx)
+                .load(url)
+                .fitCenter()
+                .listener(object : RequestListener<Drawable?> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable?>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        onError(e)
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable?>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        onSuccess(resource)
+                        return false
+                    }
+                })
                 //                    .crossFade()
                 //                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(img)

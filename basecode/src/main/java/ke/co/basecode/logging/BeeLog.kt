@@ -40,6 +40,25 @@ object BeeLog {
         }
     }
 
+    fun e(e: Exception?) {
+        if (DEBUG) {
+            if (e != null) {
+                Log.e(tag, " : " + e.localizedMessage)
+                addToHistory(tag, e.localizedMessage)
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun addToHistory(subTag: String?, message: String?) {
+//        executeAsync {
+//            val logItem = LogItem(title = subTag.toString(), details = message.toString())
+//            if (subTag?.contains("LogItem") == false){
+//                LogItemsDatabase.getInstance().logItems().insert(logItem)
+//            }
+//        }
+    }
+
     fun w(subTag: String, message: Any?) {
         if (DEBUG) {
             Log.w(tag, "$subTag : $message")

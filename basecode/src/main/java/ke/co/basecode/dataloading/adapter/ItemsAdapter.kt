@@ -22,7 +22,6 @@ class ItemsAdapter<LoadedModel>(
 
     interface OnItemClickListener<T> {
         fun onClick(item: T)
-        
     }
 
     private var syncState: SyncState? = null

@@ -14,18 +14,18 @@ object BeeLog {
     var DEBUG = false
     private var tag: String? = null
 
-    fun init(debug: Boolean, logTag: String) {
+    fun init(debug: Boolean, logTag: String?) {
         tag = logTag
         DEBUG = debug
     }
 
-    fun d(subTag: String, message: Any) {
+    fun d(subTag: String, message: Any?) {
         if (DEBUG) {
             Log.d(tag, "$subTag : $message")
         }
     }
 
-    fun e(subTag: String, message: Any) {
+    fun e(subTag: String, message: Any?) {
         if (DEBUG) {
             Log.e(tag, "$subTag : $message")
         }
@@ -40,23 +40,23 @@ object BeeLog {
         }
     }
 
-    fun w(subTag: String, message: Any) {
+    fun w(subTag: String, message: Any?) {
         if (DEBUG) {
             Log.w(tag, "$subTag : $message")
         }
     }
 
 
-    fun i(subTag: String, message: Any) {
+    fun i(subTag: String, message: Any?) {
         if (DEBUG) {
             Log.i(tag, "$subTag : $message")
         }
     }
 
 
-    fun e(subTag: String, e: Throwable) {
+    fun e(subTag: String, e: Throwable?) {
         if (DEBUG) {
-            Log.e(tag, subTag + " : " + e.message)
+            Log.e(tag, subTag + " : " + e?.message)
         }
     }
 }// no instance

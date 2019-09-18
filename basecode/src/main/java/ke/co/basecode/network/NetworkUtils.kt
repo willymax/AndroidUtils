@@ -2,8 +2,6 @@ package ke.co.basecode.network
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.readystatesoftware.chuck.BuildConfig
-import com.readystatesoftware.chuck.ChuckInterceptor
 import ke.co.basecode.logging.BeeLog
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody

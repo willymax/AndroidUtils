@@ -8,17 +8,17 @@ package ke.co.basecode.model
  * Phone: +254706356815
  * Purpose:
  */
-class User(val id: Long,
-           val name: String,
-           val emailVerifiedAt: String?,
-           val phoneVerifiedAt: String?,
-           val email: String,
-           val avatar: String?,
-           val token: String?,
-           val phone: String?,
-           val role: Role?,
-           val updatedAt: String?,
-           val createdAt: String?
+class User(var id: Long,
+           var name: String,
+           var emailVerifiedAt: String?,
+           var phoneVerifiedAt: String?,
+           var email: String,
+           var avatar: String?,
+           var token: String?,
+           var phone: String?,
+           var role: Role?,
+           var updatedAt: String?,
+           var createdAt: String?
 ) {
     override fun toString(): String {
         return "Name: $name token: $token"

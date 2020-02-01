@@ -19,7 +19,6 @@ class ItemsAdapter<LoadedModel>(
         private val itemRepository: ItemRepository<*, LoadedModel>
 ) : PagedListAdapter<LoadedModel, RecyclerView.ViewHolder>(diffUtil) {
 
-
     interface OnItemClickListener<T> {
         fun onClick(item: T)
     }

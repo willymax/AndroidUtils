@@ -17,7 +17,6 @@ import retrofit2.http.Part
  * Purpose:
  */
 interface BaseAPI {
-
     @Multipart
     @POST("")
     fun signIn(@Part("") id: RequestBody, @Part("") password: RequestBody): Call<BaseResponseModel<User>>

@@ -237,10 +237,10 @@ abstract class BaseAppFragment<D> : Fragment(), SwipeRefreshLayout.OnRefreshList
     }
 
     protected open fun onShowLoading(
-        loadingLayout: LinearLayout?,
+        mLoadingLayout: LinearLayout = loadingLayout,
         contentViewContainer: FrameLayout?
     ) {
-        loadingLayout?.showIf(mLoadingConfig.showLoading)
+        mLoadingLayout.showIf(mLoadingConfig.showLoading)
         noDataLayout?.hide()
         errorLayout?.hide()
         loadingMessageTV.setText(mLoadingConfig.loadingMessage)
@@ -255,9 +255,9 @@ abstract class BaseAppFragment<D> : Fragment(), SwipeRefreshLayout.OnRefreshList
     }
 
     protected open fun onHideLoading(
-        loadingLayout: LinearLayout?, contentViewContainer: FrameLayout?
+        mLoadingLayout: LinearLayout = loadingLayout, mContentViewContainer: FrameLayout = contentViewContainer
     ) {
-        loadingLayout?.hide()
+        mLoadingLayout.hide()
         noDataLayout?.hide()
         errorLayout?.hide()
         if (swipeRefreshLayout?.isRefreshing == true) {
@@ -293,7 +293,7 @@ abstract class BaseAppFragment<D> : Fragment(), SwipeRefreshLayout.OnRefreshList
         return null
     }
 
-    private fun showNetworkErrorDialog(message: String?) {
+    protected fun showNetworkErrorDialog(message: String?) {
         if (mLoadingConfig.showErrorDialog) {
             activity?.let {
                 AlertDialog.Builder(it)

@@ -71,6 +71,7 @@ class NetworkUtils private constructor() {
                 val response = chain.proceed(request.build())
 
 
+                //unauthenticated or unauthorized
                 if (response.code == 401 || response.code == 403) {
                     mCallback.onAuthError(response.code)
                     mClientInstance?.dispatcher?.cancelAll()

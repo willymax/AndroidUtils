@@ -10,19 +10,12 @@ import com.squareup.moshi.Json
  * Purpose:
  */
 class BaseResponseModel<T> {
-    @Json(name = "Message")
+    @Json(name = "status_code")
+    var statusCode: Int = -1
+
     var message: String? = null
 
+    var success: Boolean = false
 
-    @Json(name = "data")
     var data: T? = null
-
-
-    @Json(name = "meta")
-    var meta: Meta? = null
-}
-
-class Meta {
-    val message: String? = null
-    val code: String? = null
 }

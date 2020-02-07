@@ -11,17 +11,12 @@ import com.squareup.moshi.Json
  * Purpose:
  */
 class BaseResponseList<T> {
-    @Json(name = "Message")
+    @Json(name = "status_code")
+    var statusCode: Int = -1
+
     var message: String? = null
 
-    @Json(name = "data")
+    var success: Boolean = false
+
     var data: List<T>? = emptyList()
-
-
-    @Json(name = "meta")
-    var meta: Meta? = null
-}
-class Meta {
-    val message: String? = null
-    val code: String? = null
 }

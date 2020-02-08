@@ -237,10 +237,10 @@ abstract class BaseAppFragment<D> : Fragment(), SwipeRefreshLayout.OnRefreshList
     }
 
     protected open fun onShowLoading(
-        mLoadingLayout: LinearLayout = loadingLayout,
-        contentViewContainer: FrameLayout?
+        mLoadingLayout: LinearLayout? = loadingLayout,
+        mContentViewContainer: FrameLayout = contentViewContainer
     ) {
-        mLoadingLayout.showIf(mLoadingConfig.showLoading)
+        mLoadingLayout?.showIf(mLoadingConfig.showLoading)
         noDataLayout?.hide()
         errorLayout?.hide()
         loadingMessageTV.setText(mLoadingConfig.loadingMessage)
@@ -255,9 +255,9 @@ abstract class BaseAppFragment<D> : Fragment(), SwipeRefreshLayout.OnRefreshList
     }
 
     protected open fun onHideLoading(
-        mLoadingLayout: LinearLayout = loadingLayout, mContentViewContainer: FrameLayout = contentViewContainer
+        mLoadingLayout: LinearLayout? = loadingLayout, mContentViewContainer: FrameLayout? = contentViewContainer
     ) {
-        mLoadingLayout.hide()
+        mLoadingLayout?.hide()
         noDataLayout?.hide()
         errorLayout?.hide()
         if (swipeRefreshLayout?.isRefreshing == true) {

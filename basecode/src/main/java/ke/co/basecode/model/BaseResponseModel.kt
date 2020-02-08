@@ -15,7 +15,5 @@ class BaseResponseModel<T> {
 
     var message: String? = null
 
-    var success: Boolean = false
-
     var data: T? = null
 }

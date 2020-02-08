@@ -38,18 +38,17 @@ abstract class BaseCallback<T> @JvmOverloads constructor(
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
         if (response.isSuccessful) {
-            Log.d("FINISH_SUCCESS: ", "SUCCESS")
-            onResponse(response)
-            endProgress()
+            Log.d("FINISH_RESPONSE: ", "SUCCESS")
         } else {
-            endProgress()
-            onFinishWithError(response.message(), response.code())
+            Log.d("FINISH_RESPONSE: ", "ERROR FROM SERVER")
         }
+        onResponse(response)
+        endProgress()
     }
 
     override fun onFailure(call: Call<T>, t: Throwable) {
         endProgress()
-        onError(t.message!!)
+        onError(t.message)
     }
 
     private fun startProgress(cancel: Boolean, message: String) {
@@ -72,7 +71,7 @@ abstract class BaseCallback<T> @JvmOverloads constructor(
         Log.d("FINISH_ERROR: ", "MESSAGE: $message,CODE: $errorCode")
     }
 
-    private fun onError(message: String) {
+    private fun onError(message: String?) {
         onFailure(message)
         Log.d("ERROR: ", "MESSAGE: $message")
     }
@@ -99,5 +98,5 @@ abstract class BaseCallback<T> @JvmOverloads constructor(
     }
 
     protected abstract fun onResponse(response: Response<T>)
-    protected abstract fun onFailure(message: String)
+    protected abstract fun onFailure(message: String?)
 }

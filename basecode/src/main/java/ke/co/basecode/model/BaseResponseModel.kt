@@ -12,8 +12,7 @@ import com.squareup.moshi.Json
 class BaseResponseModel<T> {
     @Json(name = "status_code")
     var statusCode: Int = -1
-
+    var success: Boolean? = true
     var message: String? = null
-
     var data: T? = null
 }

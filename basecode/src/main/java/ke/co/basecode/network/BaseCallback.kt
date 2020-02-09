@@ -78,6 +78,7 @@ abstract class BaseCallback<T> @JvmOverloads constructor(
         if (!BaseUtils.canConnect(context)) {
             alertBuilder.setMessage("No internet connection")
         } else {
+
             alertBuilder.setMessage("Oops! An error occurred.")
         }
         alertBuilder.setTitle("Cube Messenger")

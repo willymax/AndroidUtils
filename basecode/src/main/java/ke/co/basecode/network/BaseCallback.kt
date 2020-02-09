@@ -3,8 +3,10 @@ package ke.co.basecode.network
 import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
+import com.google.gson.GsonBuilder
 import ke.co.basecode.R
 import ke.co.basecode.logging.BeeLog
+import ke.co.basecode.model.APIError
 import ke.co.basecode.utils.BaseProgressDialog
 import ke.co.basecode.utils.BaseUtils
 import retrofit2.Call
@@ -38,18 +40,20 @@ abstract class BaseCallback<T> @JvmOverloads constructor(
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
         if (response.isSuccessful) {
-            Log.d("FINISH_RESPONSE: ", "SUCCESS")
+            Log.d("FINISH_RESPONSE", "SUCCESS")
+            onResponse(response.body())
         } else {
-            Log.d("FINISH_RESPONSE: ", "ERROR FROM SERVER")
+            val apiError = GsonBuilder().create().fromJson(response.errorBody()?.string(), APIError::class.java)
+            onErrorOccurred(apiError, "Api Error")
+            Log.d("FINISH_RESPONSE", "ERROR FROM SERVER")
         }
-        onResponse(response)
         endProgress()
     }
 
     override fun onFailure(call: Call<T>, t: Throwable) {
         endProgress()
-        Log.d("ERROR: ", "MESSAGE: ${t.message}")
-        onFailure(call, t.message)
+        Log.d("ERROR", "MESSAGE: ${t.message}")
+        onErrorOccurred(message = t.message)
     }
 
     private fun startProgress(cancel: Boolean, message: String) {
@@ -68,8 +72,8 @@ abstract class BaseCallback<T> @JvmOverloads constructor(
     }
 
     private fun onFinishWithError(message: String, errorCode: Int) {
-        onFailure(message = "$errorCode - $message")
-        Log.d("FINISH_ERROR: ", "MESSAGE: $message,CODE: $errorCode")
+        onErrorOccurred(message = "$errorCode - $message")
+        Log.d("FINISH_ERROR", "MESSAGE: $message,CODE: $errorCode")
     }
 
     private fun showDialogError(message: String) {
@@ -94,6 +98,6 @@ abstract class BaseCallback<T> @JvmOverloads constructor(
 
     }
 
-    protected abstract fun onResponse(response: Response<T>)
-    protected abstract fun onFailure(call: Call<T>? = null, message: String?)
+    protected abstract fun onResponse(response: T?)
+    protected abstract fun onErrorOccurred(apiError: APIError<*>? = null, message: String? = "An error occurred")
 }

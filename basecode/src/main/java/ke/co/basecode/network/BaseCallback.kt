@@ -48,7 +48,8 @@ abstract class BaseCallback<T> @JvmOverloads constructor(
 
     override fun onFailure(call: Call<T>, t: Throwable) {
         endProgress()
-        onError(t.message)
+        Log.d("ERROR: ", "MESSAGE: ${t.message}")
+        onFailure(call, t.message)
     }
 
     private fun startProgress(cancel: Boolean, message: String) {
@@ -67,13 +68,8 @@ abstract class BaseCallback<T> @JvmOverloads constructor(
     }
 
     private fun onFinishWithError(message: String, errorCode: Int) {
-        onFailure("$errorCode - $message")
+        onFailure(message = "$errorCode - $message")
         Log.d("FINISH_ERROR: ", "MESSAGE: $message,CODE: $errorCode")
-    }
-
-    private fun onError(message: String?) {
-        onFailure(message)
-        Log.d("ERROR: ", "MESSAGE: $message")
     }
 
     private fun showDialogError(message: String) {
@@ -98,5 +94,5 @@ abstract class BaseCallback<T> @JvmOverloads constructor(
     }
 
     protected abstract fun onResponse(response: Response<T>)
-    protected abstract fun onFailure(message: String?)
+    protected abstract fun onFailure(call: Call<T>? = null, message: String?)
 }

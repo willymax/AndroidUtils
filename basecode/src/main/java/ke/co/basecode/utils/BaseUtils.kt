@@ -50,7 +50,7 @@ import java.util.*
  * Phone: +254706356815
  * Purpose:
  */
-class BaseUtils {
+open class BaseUtils {
     //stWyc&Y3bsb3M9
     companion object {
         var density = 1f

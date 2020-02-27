@@ -10,13 +10,15 @@ import com.squareup.moshi.Json
  * Phone: +254706356815
  * Purpose:
  */
-class BaseResponseList<T> {
+open class BaseResponseList<T> {
     @Json(name = "status_code")
     var statusCode: Int = -1
 
     var message: String? = null
 
     var success: Boolean = false
+
+    var paginator: Paginator? = null
 
     var data: List<T>? = emptyList()
 }

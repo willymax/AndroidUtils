@@ -8,7 +8,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ke.co.basecode.R
-import ke.co.basecode.listeners.RetryButtonClickListener
 import ke.co.basecode.network.NetworkState
 import ke.co.basecode.network.Status
 

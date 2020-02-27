@@ -8,15 +8,18 @@ package ke.co.basecode.network
  * Phone: +254706356815
  * Purpose:
  */
-class NetworkState(val status: Status, val msg: String) {
-    enum class Status {
-        RUNNING,
-        SUCCESS,
-        FAILED
-    }
-
+enum class Status {
+    RUNNING,
+    SUCCESS,
+    FAILED
+}
+@Suppress("DataClassPrivateConstructor")
+data class NetworkState private constructor(
+    val status: Status,
+    val msg: String? = null) {
     companion object {
-        val LOADED: NetworkState = NetworkState(Status.SUCCESS, "Success")
-        val LOADING: NetworkState = NetworkState(Status.RUNNING, "Loading...")
+        val LOADED = NetworkState(Status.SUCCESS)
+        val LOADING = NetworkState(Status.RUNNING)
+        fun error(msg: String?) = NetworkState(Status.FAILED, msg)
     }
 }

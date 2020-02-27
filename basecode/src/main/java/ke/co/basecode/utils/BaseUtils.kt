@@ -51,7 +51,7 @@ import java.util.*
  * Purpose:
  */
 open class BaseUtils {
-    
+
     //stWyc&Y3bsb3M9
     companion object {
         var density = 1f

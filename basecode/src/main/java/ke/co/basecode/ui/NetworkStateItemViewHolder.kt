@@ -10,40 +10,43 @@ import androidx.recyclerview.widget.RecyclerView
 import ke.co.basecode.R
 import ke.co.basecode.listeners.RetryButtonClickListener
 import ke.co.basecode.network.NetworkState
+import ke.co.basecode.network.Status
 
-class NetworkStateItemViewHolder(itemView: View, listener: RetryButtonClickListener) :
-    RecyclerView.ViewHolder(itemView) {
-    private val progressBar: ProgressBar = itemView.findViewById(R.id.progress_bar)
-    private val retry: Button = itemView.findViewById(R.id.retry_button)
-    private val errorMsg: TextView = itemView.findViewById(R.id.error_msg)
-
+class NetworkStateItemViewHolder(view: View,
+                                 private val retryCallback: () -> Unit, private var showRetryButton: Boolean = false,  private var showErrorMessage: Boolean = false)
+    : RecyclerView.ViewHolder(view) {
+    private val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar)
+    private val retry = view.findViewById<Button>(R.id.retry_button)
+    private val errorMsg = view.findViewById<TextView>(R.id.error_msg)
     init {
-        retry.setOnClickListener { listener.retry() }
+        retry.setOnClickListener {
+            retryCallback()
+        }
+    }
+    fun bindTo(networkState: NetworkState?) {
+        progressBar.visibility = toVisibility(networkState?.status == Status.RUNNING)
+        if (showRetryButton) {
+            retry.visibility = toVisibility(networkState?.status == Status.FAILED)
+        }
+        if (showErrorMessage) {
+            errorMsg.visibility = toVisibility(networkState?.msg != null)
+            errorMsg.text = networkState?.msg
+        }
     }
 
-    fun bindView(networkState: NetworkState) {
-        if (networkState.status == NetworkState.Status.RUNNING) {
-            progressBar.visibility = View.VISIBLE
-        } else {
-            progressBar.visibility = View.GONE
-        }
-        if (networkState.status == NetworkState.Status.FAILED) {
-            retry.visibility = View.VISIBLE
-        } else {
-            retry.visibility = View.GONE
-        }
-        errorMsg.text = networkState.msg
-        errorMsg.visibility = View.VISIBLE
-    }
     companion object {
-        fun create(parent: ViewGroup, retryListener : RetryButtonClickListener): NetworkStateItemViewHolder {
+        fun create(parent: ViewGroup, retryCallback: () -> Unit): NetworkStateItemViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.network_state_item, parent, false)
-            return NetworkStateItemViewHolder(view, object : RetryButtonClickListener {
-                override fun retry() {
-                    retryListener.retry()
-                }
-            })
+            return NetworkStateItemViewHolder(view, retryCallback)
+        }
+
+        fun toVisibility(constraint : Boolean): Int {
+            return if (constraint) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
     }
 }

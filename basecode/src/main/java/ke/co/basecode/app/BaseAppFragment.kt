@@ -314,7 +314,7 @@ abstract class BaseAppFragment<D> : Fragment(), SwipeRefreshLayout.OnRefreshList
 
     protected fun showErrorSnack(msg: String) {
         view?.let {
-            Snackbar.make(it, msg, Snackbar.LENGTH_INDEFINITE).setAction(android.R.string.ok) {}
+            Snackbar.make(it, msg, Snackbar.LENGTH_LONG).setAction(android.R.string.ok) {}
                 .show()
         }
     }

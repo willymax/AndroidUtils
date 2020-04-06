@@ -9,7 +9,7 @@ import com.squareup.moshi.Json
  * Phone: +254706356815
  * Purpose:
  */
-class BaseResponseModel<T> {
+open class BaseResponseModel<T> {
     @Json(name = "status_code")
     var statusCode: Int = -1
     var success: Boolean? = true

@@ -12,6 +12,7 @@ import ke.co.basecode.utils.BaseUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 /**
  * Created by Willy on 04/03/2020
@@ -40,7 +41,14 @@ abstract class BaseCallbackWithLoading<T> @JvmOverloads constructor(
             Log.d("FINISH_RESPONSE", "SUCCESS")
             onResponse(response.body())
         } else {
-            val apiError = GsonBuilder().create().fromJson(response.errorBody()?.string(), APIError::class.java)
+            var apiError: APIError<*>? = null
+            try {
+                apiError = GsonBuilder().create().fromJson(response.errorBody()?.string(), APIError::class.java)
+            } catch (ex: IllegalStateException) {
+
+            } catch (e: Exception) {
+
+            }
             onErrorOccurred(apiError, "Api Error")
             Log.d("FINISH_RESPONSE", "ERROR FROM SERVER")
         }

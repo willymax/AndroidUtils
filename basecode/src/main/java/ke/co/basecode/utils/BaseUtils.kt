@@ -32,6 +32,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
@@ -106,6 +107,11 @@ open class BaseUtils {
 
         fun uuidToLong(id: String?): Long {
             return (31 * 2 + (id?.hashCode() ?: 0)).toLong()
+        }
+
+        fun hideSoftKeyboard(activity: Activity, view: View?) {
+            (activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
+                view?.windowToken, 0)
         }
 
 

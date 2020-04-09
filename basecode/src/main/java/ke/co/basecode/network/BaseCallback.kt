@@ -6,6 +6,7 @@ import ke.co.basecode.model.APIError
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 
 /**
@@ -21,7 +22,14 @@ abstract class BaseCallback<T> : Callback<T> {
             Log.d(TAG, "SUCCESS")
             onResponse(response.body())
         } else {
-            val apiError = GsonBuilder().create().fromJson(response.errorBody()?.string(), APIError::class.java)
+            var apiError: APIError<*>? = null
+            try {
+                apiError = GsonBuilder().create().fromJson(response.errorBody()?.string(), APIError::class.java)
+            } catch (ex: IllegalStateException) {
+
+            } catch (e: Exception) {
+
+            }
             onErrorOccurred(apiError, "Api Error")
             Log.d(TAG, "ERROR FROM SERVER")
         }

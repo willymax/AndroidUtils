@@ -50,4 +50,22 @@
     <string name="todo">TODO</string>
     <string name="close">Close</string>
     <string name="clear">Clear</string>
+
+<!--    authentication-->
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_email">Not a valid email</string>
+    <string name="invalid_password">Invalid password</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="passwords_dont_match">Password don\'t match</string>
+    <string name="change_password_failed">Change password failed</string>
+    <string name="change_password">Change Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="password_changed_successfully">Password changed successfully</string>
+    <string name="action_sign_in_short">Action SignIn Short</string>
+    <string name="prompt_confirm_new_password">Confirm New Password</string>
+    <string name="action_confirm_short">Confirm</string>
+    <string name="prompt_password">Enter password</string>
+    <string name="prompt_email">Enter email</string>
+    <string name="welcome">Welcome</string>
 </resources>

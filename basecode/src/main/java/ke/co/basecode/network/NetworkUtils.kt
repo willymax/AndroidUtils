@@ -96,7 +96,6 @@ class NetworkUtils private constructor() {
             val networkInfo = connMgr.activeNetworkInfo
             return networkInfo != null && networkInfo.isConnected
         }
-
     }
 
     interface Callback {
@@ -106,6 +105,4 @@ class NetworkUtils private constructor() {
         fun getContext(): Context
         fun getCommonParams(): Map<String, String>
     }
-
-
 }

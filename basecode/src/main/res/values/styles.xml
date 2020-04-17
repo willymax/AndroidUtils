@@ -72,4 +72,24 @@
         <item name="android:textSize">21sp</item>
         <item name="android:textStyle">italic</item>
     </style>
+
+    <style name="AppWidget.TextInputLayoutOutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/spacing_small</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/spacing_small</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/spacing_small</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/spacing_small</item>
+        <item name="android:layout_marginTop">@dimen/spacing_xmedium</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AppWidget.TextInputLayoutFilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusTopStart">@dimen/spacing_small</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/spacing_small</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/spacing_small</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/spacing_small</item>
+        <item name="android:layout_marginTop">@dimen/spacing_xmedium</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>

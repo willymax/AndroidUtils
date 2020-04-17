@@ -20,7 +20,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import ke.co.basecode.R
 import ke.co.basecode.logging.BeeLog
-import ke.co.basecode.model.User
 import ke.co.basecode.utils.BaseProgressDialog
 import ke.co.basecode.utils.BaseUtils
 

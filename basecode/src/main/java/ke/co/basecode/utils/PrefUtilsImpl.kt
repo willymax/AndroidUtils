@@ -13,7 +13,7 @@ import ke.co.basecode.logging.BeeLog
  * Phone: +254706356815
  * Purpose:
  */
-open class PrefUtilsImpl(protected val context: Context, private val sharedPreferences: SharedPreferences) {
+open class PrefUtilsImpl(private val context: Context, private val sharedPreferences: SharedPreferences) {
 
     protected open fun invalidate() {}
 

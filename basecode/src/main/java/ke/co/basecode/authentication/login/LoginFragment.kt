@@ -4,7 +4,6 @@ package ke.co.basecode.authentication.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -12,13 +11,13 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import ke.co.basecode.R
 import ke.co.basecode.api.BaseApiService
 import ke.co.basecode.app.BaseAppFragment
-import ke.co.basecode.authentication.utilities.PrefUtils
 import ke.co.basecode.logging.BeeLog
 import ke.co.basecode.model.BaseResponseModel
 import kotlinx.android.synthetic.main.fragment_login.*

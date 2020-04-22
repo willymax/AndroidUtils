@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import ke.co.basecode.R
 import ke.co.basecode.api.BaseApiService
 import ke.co.basecode.app.BaseAppFragment
-import ke.co.basecode.authentication.utilities.PrefUtils
 import ke.co.basecode.logging.BeeLog
 import ke.co.basecode.model.BaseResponseModel
 import kotlinx.android.synthetic.main.fragment_change_password.*

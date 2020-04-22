@@ -14,10 +14,10 @@ class BaseCodeInit private constructor(
     private val sharedPreferences: SharedPreferences
 ) {
     fun getPrefUtils() = PrefUtils.instance(context, sharedPreferences)
+
     companion object {
-        private var prefUtils: PrefUtils? = null
-        private var context: Context? = null
         private var mInstance: BaseCodeInit? = null
+
         fun init(context: Context, sharedPreferences: SharedPreferences) {
             if (mInstance == null) {
                 mInstance = BaseCodeInit(context, sharedPreferences)

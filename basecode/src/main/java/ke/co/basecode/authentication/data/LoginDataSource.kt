@@ -5,7 +5,6 @@ import ke.co.basecode.api.BaseApiService
 import ke.co.basecode.api.changePassword
 import ke.co.basecode.api.signIn
 import ke.co.basecode.authentication.login.User
-import ke.co.basecode.authentication.utilities.PrefUtils
 import ke.co.basecode.extensions.executeAsync
 
 /**

@@ -19,7 +19,6 @@ import java.lang.Exception
 abstract class BaseCallback<T> : Callback<T> {
     override fun onResponse(call: Call<T>, response: Response<T>) {
         if (response.isSuccessful) {
-            Log.d(TAG, "SUCCESS")
             onResponse(response.body())
         } else {
             var apiError: APIError<*>? = null
@@ -30,23 +29,20 @@ abstract class BaseCallback<T> : Callback<T> {
             } catch (e: Exception) {
 
             }
-            onErrorOccurred(apiError, "Api Error")
-            Log.d(TAG, "ERROR FROM SERVER")
+            onErrorOccurred(apiError, "Api Error", errorCode = response.code())
         }
     }
 
     override fun onFailure(call: Call<T>, t: Throwable) {
-        Log.d(TAG, "MESSAGE: ${t.message}")
-        onErrorOccurred(message = t.message)
+        onErrorOccurred(message = t.message, errorCode = 0)
     }
 
     private fun onFinishWithError(message: String, errorCode: Int) {
-        onErrorOccurred(message = "$errorCode - $message")
-        Log.d(TAG, "MESSAGE: $message,CODE: $errorCode")
+        onErrorOccurred(message = "$errorCode - $message", errorCode = errorCode)
     }
 
     protected abstract fun onResponse(response: T?)
-    protected abstract fun onErrorOccurred(apiError: APIError<*>? = null, message: String? = "An error occurred")
+    protected abstract fun onErrorOccurred(apiError: APIError<*>? = null, message: String? = "An error occurred", errorCode: Int)
     companion object {
         const val TAG = "BaseCallback"
     }

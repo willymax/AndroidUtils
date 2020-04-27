@@ -2,17 +2,14 @@ package ke.co.basecode.network
 
 import android.app.AlertDialog
 import android.content.Context
-import android.util.Log
 import com.google.gson.GsonBuilder
 import ke.co.basecode.R
-import ke.co.basecode.logging.BeeLog
 import ke.co.basecode.model.APIError
 import ke.co.basecode.utils.BaseProgressDialog
 import ke.co.basecode.utils.BaseUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 
 /**
  * Created by Willy on 04/03/2020
@@ -38,7 +35,6 @@ abstract class BaseCallbackWithLoading<T> @JvmOverloads constructor(
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
         if (response.isSuccessful) {
-            Log.d("FINISH_RESPONSE", "SUCCESS")
             onResponse(response.body())
         } else {
             var apiError: APIError<*>? = null
@@ -49,16 +45,14 @@ abstract class BaseCallbackWithLoading<T> @JvmOverloads constructor(
             } catch (e: Exception) {
 
             }
-            onErrorOccurred(apiError, "Api Error")
-            Log.d("FINISH_RESPONSE", "ERROR FROM SERVER")
+            onErrorOccurred(apiError, "Api Error", response.code())
         }
         endProgress()
     }
 
     override fun onFailure(call: Call<T>, t: Throwable) {
         endProgress()
-        Log.d("ERROR", "MESSAGE: ${t.message}")
-        onErrorOccurred(message = t.message)
+        onErrorOccurred(message = t.message, errorCode = 0)
     }
 
     private fun startProgress(cancel: Boolean, message: String) {
@@ -76,18 +70,11 @@ abstract class BaseCallbackWithLoading<T> @JvmOverloads constructor(
         }
     }
 
-    private fun onFinishWithError(message: String, errorCode: Int) {
-        onErrorOccurred(message = "$errorCode - $message")
-        Log.d("FINISH_ERROR", "MESSAGE: $message,CODE: $errorCode")
-    }
-
     private fun showDialogError(message: String) {
-        BeeLog.d("William", message)
         val alertBuilder = AlertDialog.Builder(this.context)
         if (!BaseUtils.canConnect(context)) {
             alertBuilder.setMessage("No internet connection")
         } else {
-
             alertBuilder.setMessage("Oops! An error occurred.")
         }
         alertBuilder.setTitle("Cube Messenger")
@@ -104,5 +91,5 @@ abstract class BaseCallbackWithLoading<T> @JvmOverloads constructor(
     }
 
     protected abstract fun onResponse(response: T?)
-    protected abstract fun onErrorOccurred(apiError: APIError<*>? = null, message: String? = "An error occurred")
+    protected abstract fun onErrorOccurred(apiError: APIError<*>? = null, message: String? = "An error occurred", errorCode: Int)
 }

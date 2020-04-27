@@ -76,8 +76,6 @@ open class BaseActivity : AppCompatActivity() {
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }
-
-        Log.d(TAG, "Activity Label: $label")
         if (getToolbar() != null && !TextUtils.isEmpty(label)) {
             getToolbar()?.title = label
         }
@@ -117,7 +115,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        BaseUtils.tintMenu(this, menu, Color.WHITE)
+        BaseUtils.tintMenu(menu, Color.WHITE)
         return super.onCreateOptionsMenu(menu)
     }
 

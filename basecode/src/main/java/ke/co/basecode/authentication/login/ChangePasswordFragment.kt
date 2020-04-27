@@ -64,7 +64,6 @@ class ChangePasswordFragment(private val apiService: BaseApiService) : BaseAppFr
 
             //loading_progress_bar.visibility = View.GONE
             onHideLoading()
-            BeeLog.d("William", "Called loginResult")
             if (changePasswordResult.error != null) {
                 showChangePasswordFailed(changePasswordResult.error)
             }

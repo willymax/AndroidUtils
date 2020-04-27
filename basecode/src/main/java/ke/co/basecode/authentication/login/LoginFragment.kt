@@ -71,7 +71,6 @@ class LoginFragment(private val apiService: BaseApiService) : BaseAppFragment<Ba
 
             //loading_progress_bar.visibility = View.GONE
             onHideLoading()
-            BeeLog.d("William", "Called loginResult")
             if (loginResult.error != null) {
                 showLoginFailed(loginResult.error)
             }

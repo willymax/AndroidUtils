@@ -1,3 +1,5 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package ke.co.basecode.utils
 
 import android.annotation.SuppressLint
@@ -7,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
@@ -31,6 +34,10 @@ import ke.co.basecode.R
 import ke.co.basecode.logging.BeeLog
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,20 +50,23 @@ import java.util.*
  * Phone: +254706356815
  * Purpose:
  */
+@Suppress("unused")
 open class BaseUtils {
 
     //stWyc&Y3bsb3M9
     companion object {
-        var density = 1f
         var displaySize = Point()
         private var screenHeight = 0
         private var screenWidth = 0
+        val SDF = SimpleDateFormat("yyyymmddhhmmss", Locale.US)
         fun canConnect(context: Context): Boolean {
-            val connMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val connMgr =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val networkInfo = connMgr.activeNetworkInfo
             return networkInfo != null && networkInfo.isConnected
         }
-        fun tintMenu(activity: Activity, menu: Menu?, @ColorInt color: Int) {
+
+        fun tintMenu(menu: Menu?, @ColorInt color: Int) {
             if (menu != null && menu.size() > 0) {
                 for (i in 0 until menu.size()) {
                     val item = menu.getItem(i)
@@ -71,6 +81,7 @@ open class BaseUtils {
                 }
             }
         }
+
         fun tintProgressBar(progressBar: ProgressBar, @ColorInt color: Int) {
             progressBar.indeterminateDrawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         }
@@ -93,7 +104,8 @@ open class BaseUtils {
             if (callIntent.resolveActivity(context.packageManager) != null) {
                 context.startActivity(Intent.createChooser(callIntent, "Make call..."))
             } else {
-                Toast.makeText(context, "Unable to find a calling application.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Unable to find a calling application.", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -103,7 +115,8 @@ open class BaseUtils {
 
         fun hideSoftKeyboard(activity: Activity, view: View?) {
             (activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
-                view?.windowToken, 0)
+                view?.windowToken, 0
+            )
         }
 
 
@@ -114,7 +127,11 @@ open class BaseUtils {
             if (intent.resolveActivity(context.packageManager) != null) {
                 context.startActivity(Intent.createChooser(intent, "Send sms..."))
             } else {
-                Toast.makeText(context, "Unable to find a messaging application.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Unable to find a messaging application.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -140,11 +157,16 @@ open class BaseUtils {
 
 
         fun cacheInput(editText: EditText, @StringRes key: Int, prefUtils: PrefUtilsImpl) {
-            val currentInput : String? = prefUtils.getString(key)
+            val currentInput: String? = prefUtils.getString(key)
             editText.setText(currentInput)
             editText.setSelection(currentInput?.length!!)
             editText.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                override fun beforeTextChanged(
+                    charSequence: CharSequence,
+                    i: Int,
+                    i1: Int,
+                    i2: Int
+                ) {
 
                 }
 
@@ -184,12 +206,11 @@ open class BaseUtils {
 
 
         fun generateColor(`object`: Any): Int {
-            // return ColorGenerator.MATERIAL.getColor(object);
+            //return ColorGenerator.MATERIAL.getColor(object);
             return 0
         }
 
-        fun showNetworkErrorDialog(context : Context, message : String) {
-            BeeLog.d("William", message)
+        fun showNetworkErrorDialog(context: Context, message: String) {
             val alertBuilder = AlertDialog.Builder(context)
             if (!canConnect(context)) {
                 alertBuilder.setMessage("No internet connection")
@@ -232,7 +253,7 @@ open class BaseUtils {
         }
 
         const val PRICE_FORMAT = "%,.2f"
-        private val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
+        private val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US)
 
 
         fun formatPrice(price: Double): String {
@@ -266,7 +287,15 @@ open class BaseUtils {
         }
 
         fun getDaysOfWeek(numDays: Array<String>): String {
-            val strDays = arrayOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+            val strDays = arrayOf(
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            )
             val weekDays = StringBuilder()
             for (i in numDays.indices) {
                 if (i != numDays.size - 1) {
@@ -347,26 +376,30 @@ open class BaseUtils {
             }
             return Patterns.EMAIL_ADDRESS.matcher(email).matches()
         }
-        fun  stringToRequestBody(input : String) = input.toRequestBody("text/plain".toMediaTypeOrNull())
+
+        fun stringToRequestBody(input: String) =
+            input.toRequestBody("text/plain".toMediaTypeOrNull())
 
         fun getDiffBtwTimestamps(firstTimestamp: String, secondTimestamp: String): String {
             var elapsedTime = ""
             try {
                 val diffInDays =
-                    ((simpleDateFormat.parse(firstTimestamp).time - simpleDateFormat.parse(secondTimestamp).time) / (1000 * 60 * 60 * 24)).toInt()
+                    ((simpleDateFormat.parse(firstTimestamp).time - simpleDateFormat.parse(
+                        secondTimestamp
+                    ).time) / (1000 * 60 * 60 * 24)).toInt()
                 val months = diffInDays / 31
-                if (months < 1) {
-                    elapsedTime = "$diffInDays days ago"
-                } else if (months >= 1 && months <= 12) {
+                elapsedTime = if (months < 1) {
+                    "$diffInDays days ago"
+                } else if (months in 1..12) {
                     if (months == 1) {
-                        elapsedTime = "about $months month ago"
+                        "about $months month ago"
                     } else {
-                        elapsedTime = "about $months months ago"
+                        "about $months months ago"
                     }
-                } else if (months >= 13 && months <= 24) {
-                    elapsedTime = "about $months year ago"
+                } else if (months in 13..24) {
+                    "about $months year ago"
                 } else {
-                    elapsedTime = "about $months years ago"
+                    "about $months years ago"
                 }
             } catch (e: ParseException) {
                 e.printStackTrace()
@@ -376,7 +409,7 @@ open class BaseUtils {
 
         fun convertLayoutToImage(mContext: Context, count: Int, drawableId: Int): Drawable {
             val inflater = LayoutInflater.from(mContext)
-            val view : View = inflater.inflate(R.layout.badge_icon_layout, null)
+            val view: View = inflater.inflate(R.layout.badge_icon_layout, null)
             (view.findViewById(R.id.icon_badge) as ImageView).setImageResource(drawableId)
             val textView = view.findViewById(R.id.count) as TextView
             textView.setText(count)
@@ -390,6 +423,78 @@ open class BaseUtils {
             val bitmap = Bitmap.createBitmap(view.drawingCache)
             // view.setDrawingCacheEnabled(false)
             return BitmapDrawable(mContext.resources, bitmap)
+        }
+
+        /**
+        compress the file/photo from @param <b>path</b> to a private location on the current device and return the compressed file.
+        @param path = The original image path
+        @param context = Current android Context
+         */
+        @Throws(IOException::class)
+        fun getCompressed(
+            context: Context?,
+            path: String?,
+            width: Int, height: Int
+        ): File? {
+            if (context == null) throw NullPointerException("Context must not be null.")
+            //getting device external cache directory, might not be available on some devices,
+            // so our code fall back to internal storage cache directory, which is always available but in smaller quantity
+            var cacheDir = context.externalCacheDir
+            if (cacheDir == null) //fall back
+                cacheDir = context.cacheDir
+            val rootDir = cacheDir!!.absolutePath + "/ImageCompressor"
+            val root = File(rootDir)
+
+            //Create ImageCompressor folder if it doesn't already exists.
+            if (!root.exists()) root.mkdirs()
+
+            //decode and resize the original bitmap from @param path.
+            val bitmap: Bitmap = decodeImageFromFiles(
+                path,  /* your desired width*/
+                width,  /*your desired height*/
+                height
+            )
+
+            //create placeholder for the compressed image file
+            val compressed = File(
+                root, SDF.format(Date()) + ".jpg" /*Your desired format*/
+            )
+
+            //convert the decoded bitmap to stream
+            val byteArrayOutputStream =
+                ByteArrayOutputStream()
+
+//            compress bitmap into byteArrayOutputStream
+//            Bitmap.compress(Format, Quality, OutputStream)
+//            Where Quality ranges from 1 - 100.
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream)
+
+//        Right now, we have our bitmap inside byteArrayOutputStream Object, all we need next is to write it to the compressed file we created earlier,
+//        java.io.FileOutputStream can help us do just That!
+            val fileOutputStream = FileOutputStream(compressed)
+            fileOutputStream.write(byteArrayOutputStream.toByteArray())
+            fileOutputStream.flush()
+            fileOutputStream.close()
+
+            //File written, return to the caller. Done!
+            return compressed
+        }
+
+        private fun decodeImageFromFiles(path: String?, width: Int, height: Int): Bitmap {
+            val scaleOptions = BitmapFactory.Options()
+            scaleOptions.inJustDecodeBounds = true
+            BitmapFactory.decodeFile(path, scaleOptions)
+            var scale = 1
+            while (scaleOptions.outWidth / scale / 2 >= width
+                && scaleOptions.outHeight / scale / 2 >= height
+            ) {
+                scale *= 2
+            }
+            // decode with the sample size
+            val outOptions = BitmapFactory.Options()
+            outOptions.inSampleSize = scale
+            return BitmapFactory.decodeFile(path, outOptions)
         }
     }
 
